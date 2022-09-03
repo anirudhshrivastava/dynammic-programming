@@ -1,3 +1,4 @@
+//using dp TC-O(N) SC-O(N)+O(N)
 long long solve(vector<int> &dp,int nStairs){
   
    int mod= 1000000007;
@@ -16,3 +17,21 @@ int countDistinctWays(long long nStairs) {
    return solve(dp,nStairs);
     
 }
+//space optimization
+int mod= 1000000007;
+    dp[0]=1;
+    dp[1]=1;
+    for(int i=2;i<=nStairs;i++){
+        dp[i]=(dp[i-1]%mod+dp[i-2]%mod)%mod;
+    }
+    return dp[nStairs]%mod;
+// pointers
+int mod= 1000000007;
+   int prev2=1;
+    int prev1=1;
+    for(int i=2;i<=nStairs;i++){
+        int curr=(prev1%mod+prev2%mod)%mod;
+        prev2=prev1%mod;
+        prev1=curr%mod;
+    }
+    return prev1;
